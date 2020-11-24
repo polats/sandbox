@@ -1,5 +1,9 @@
 {
+  "name": "@polats/sandbox",
   "version": "0.1.1",
+  "description": "A sandbox library for import in observablehq.",
+  "author": "Paul Gadi <paul@outplay.games>",
+  "repository": "github:polats/phaser-ui-tools",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -19,6 +23,14 @@
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.9.0",
+    "husky": "^4.3.0",
+    "size-limit": "^4.9.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.2"
+  },
   "peerDependencies": {},
   "husky": {
     "hooks": {
@@ -31,8 +43,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@polats/sandbox",
-  "author": "Paul Gadi",
   "module": "dist/sandbox.esm.js",
   "size-limit": [
     {
@@ -43,13 +53,5 @@
       "path": "dist/sandbox.esm.js",
       "limit": "10 KB"
     }
-  ],
-  "devDependencies": {
-    "@size-limit/preset-small-lib": "^4.9.0",
-    "husky": "^4.3.0",
-    "size-limit": "^4.9.0",
-    "tsdx": "^0.14.1",
-    "tslib": "^2.0.3",
-    "typescript": "^4.1.2"
-  }
+  ]
 }

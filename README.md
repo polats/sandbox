@@ -1,6 +1,6 @@
-# Just A Test Library!
+# @polats/sandbox
 
-# TSDX User Guide
+# A Sandbox Library for Import in ObservableHQ
 
 Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
 
