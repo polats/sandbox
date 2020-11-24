@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "A sandbox library for import in observablehq.",
   "author": "Paul Gadi <paul@outplay.games>",
-  "repository": "github:polats/phaser-ui-tools",
+  "repository": "github:polats/sandbox",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
