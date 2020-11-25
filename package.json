@@ -19,9 +19,8 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "microbundle",
-    "test": "tsdx test",
+    "test": "mocha test",
     "lint": "tsdx lint",
-    "prepare": "microbundle",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
@@ -29,6 +28,7 @@
     "@size-limit/preset-small-lib": "^4.9.0",
     "husky": "^4.3.0",
     "microbundle": "^0.12.4",
+    "mocha": "^8.2.1",
     "size-limit": "^4.9.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.0.3",
