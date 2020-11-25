@@ -1,6 +1,6 @@
 {
   "name": "@polats/sandbox",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A sandbox library for import in observablehq.",
   "author": "Paul Gadi <paul@outplay.games>",
   "repository": "github:polats/sandbox",
