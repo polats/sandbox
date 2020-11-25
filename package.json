@@ -7,8 +7,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "module": "dist/sandbox.esm.js",
-  "unpkg": "dist/sandbox.umd.js",
+  "module": "dist/index.esm.js",
+  "unpkg": "dist/index.umd.js",
   "files": [
     "dist",
     "src"
@@ -53,11 +53,11 @@
   },
   "size-limit": [
     {
-      "path": "dist/sandbox.cjs.production.min.js",
+      "path": "dist/index.umd.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/sandbox.esm.js",
+      "path": "dist/index.esm.js",
       "limit": "10 KB"
     }
   ]
