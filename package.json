@@ -31,7 +31,12 @@
     "tslib": "^2.0.3",
     "typescript": "^4.1.2"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "phaser-ce": "2.10.3"
+  },
+  "dependencies": {
+    "eventemitter3": "^4.0.7"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
