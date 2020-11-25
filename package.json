@@ -11,21 +11,22 @@
     "dist/sandbox.js"
   ],
   "scripts": {
-    "build:js": "webpack",
+    "dev": "npm run copylib && serve examples",
+    "build": "webpack",
+    "copylib": "copyfiles -f dist/sandbox.js examples/lib/",
     "test": "mocha test"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "babel-loader": "^8.2.1",
-    "chai": "^4.2.0",
     "copyfiles": "^2.4.0",
-    "documentation": "^13.1.0",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.0",
+    "serve": "^11.3.2",
     "webpack": "^5.1.1",
     "webpack-cli": "^4.0.0"
   },
