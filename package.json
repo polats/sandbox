@@ -6,10 +6,9 @@
   "repository": "github:polats/sandbox",
   "license": "MIT",
   "main": "dist/sandbox.js",
-  "unpkg": "dist/sandbox.min.js",
+  "unpkg": "dist/sandbox.js",
   "files": [
-    "dist/sandbox.js",
-    "dist/sandbox.min.js"
+    "dist/sandbox.js"
   ],
   "scripts": {
     "build:js": "webpack",
