@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "tsdx build",
+    "build": "microbundle",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.0",
     "husky": "^4.3.0",
+    "microbundle": "^0.12.4",
     "size-limit": "^4.9.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.0.3",
