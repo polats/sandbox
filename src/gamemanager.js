@@ -33,7 +33,6 @@ class PreloaderScene extends Phaser.Scene {
         super('Preloader');
     }
     preload() {
-        console.log(GameManager.world)
 		this.add.sprite(0, 0, 'background').setDisplaySize(
             GameManager.world.width * 2, GameManager.world.height * 2
         ).setTintFill(0x000000, 0x000000, 0x888888, 0x888888);
@@ -135,7 +134,6 @@ GameManager.fadeOutIn = function(passedCallback, context) {
     type: Phaser.WEBGL,
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
 		width: 1366, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
 		height: 768 // 768 1024 640
     },
@@ -150,7 +148,9 @@ GameManager.startGame = function(canvas = null) {
         canvas
     }
 
-    console.log(config)
+    if (canvas === null) {
+        config.scale.autoCenter = Phaser.Scale.CENTER_BOTH
+    }
 
     GameManager.game = new Phaser.Game(config);
 }
