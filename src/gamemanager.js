@@ -132,6 +132,7 @@ GameManager.fadeOutIn = function(passedCallback, context) {
   };
 
   GameManager.config = {
+    type: Phaser.WEBGL,
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -148,6 +149,8 @@ GameManager.startGame = function(canvas = null) {
         ...GameManager.config,
         canvas
     }
+
+    console.log(config)
 
     GameManager.game = new Phaser.Game(config);
 }
