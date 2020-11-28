@@ -4,7 +4,17 @@
     <script src="./phaser.3.24.1.min.js"></script>
     <script src="./sandbox.js"></script>
     <script>
-      sandbox.GameManager.startGame();
+      sandbox.GameManager.startGame(
+        null,
+        {
+          scale: {
+          mode: Phaser.Scale.FIT,
+          autoCenter: Phaser.Scale.CENTER_BOTH,
+          width: 1366, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
+          height: 768 // 768 1024 640
+          }
+        }
+      );
     </script>
 
     <style>

@@ -134,15 +134,15 @@ GameManager.fadeOutIn = function(passedCallback, context) {
     type: Phaser.WEBGL,
     scale: {
         mode: Phaser.Scale.FIT,
-		width: 1366, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
-		height: 768 // 768 1024 640
+		width: 360, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
+		height: 640 // 768 1024 640
     },
     scene: [BootScene, PreloaderScene]
 };
 
-GameManager.startGame = function(canvas = null) {
+GameManager.startGame = function(canvas = null, configOverride = null) {
 
-   const config = 
+   var config = 
     {
         ...GameManager.config,
         canvas
@@ -150,6 +150,13 @@ GameManager.startGame = function(canvas = null) {
 
     if (canvas === null) {
         config.scale.autoCenter = Phaser.Scale.CENTER_BOTH
+    }
+
+    if (configOverride) {
+        config = {
+            ...config,
+            ...configOverride
+        }
     }
 
     GameManager.game = new Phaser.Game(config);
