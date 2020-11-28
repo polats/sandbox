@@ -109,16 +109,6 @@ class Button extends Phaser.GameObjects.Image {
 
 var GameManager = {}
 
-GameManager.config = {
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-		width: 768, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
-		height: 1024 // 768 1024 640
-    },
-    scene: [BootScene, PreloaderScene]
-};
-
 GameManager.fadeOutIn = function(passedCallback, context) {
     context.cameras.main.fadeOut(250);
     context.time.addEvent({
@@ -141,12 +131,25 @@ GameManager.fadeOutIn = function(passedCallback, context) {
     });
   };
 
+  GameManager.config = {
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+		width: 1366, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
+		height: 768 // 768 1024 640
+    },
+    scene: [BootScene, PreloaderScene]
+};
 
-GameManager.startGame = function() {
+GameManager.startGame = function(canvas = null) {
 
-    var game = new Phaser.Game(GameManager.config);
+   const config = 
+    {
+        ...GameManager.config,
+        canvas
+    }
 
+    GameManager.game = new Phaser.Game(config);
 }
-
 
 module.exports.GameManager = GameManager;

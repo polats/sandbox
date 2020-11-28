@@ -2,8 +2,8 @@ var config = {
 	scale: {
 		mode: Phaser.Scale.FIT,
 		autoCenter: Phaser.Scale.CENTER_BOTH,
-		width: 768, // 1366 768 360
-		height: 1024 // 768 1024 640
+		width: 800, // 1366 768 360
+		height: 600 // 768 1024 640
 	},
     scene: {
         preload: preload,
