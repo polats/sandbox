@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.AUTO,
-    width: 400,
-    height: 300,
+    width: 800,
+    height: 600,
     scene: {
         preload: preload,
         create: create,
@@ -19,7 +19,7 @@ function preload() {
 }
 
 function create() {
-    var viewport = new sandbox.Viewport(this, 75, 75, 260, 128);
+    var viewport = new sandbox.Viewport(this, 200, 200, 200, 200);
     var row = new sandbox.Row(this, 0, 0);
 
     viewport.addNode(row);

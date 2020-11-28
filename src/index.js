@@ -13,6 +13,9 @@ import { Viewport } from './containers/viewport';
 
 import { Button } from './phaserObjects/button';
 
+import { GameManager } from './gamemanager'
+import { BootScene, PreloaderScene } from './scenes'
+
 export {
     TextSprite,
     TextButton,
@@ -20,10 +23,13 @@ export {
     Wheel3D,
     QuantityBar,
     Scrollbar,
-    ValueBar,
+    ValueBar, 
     Frame,
     Column,
     Row,
     Viewport,
     Button,
+    GameManager,
+    BootScene,
+    PreloaderScene
 };

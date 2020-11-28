@@ -11,7 +11,8 @@
     "dist/sandbox.js"
   ],
   "scripts": {
-    "dev": "npm run copylib && serve examples",
+    "play": "npm run copylib && serve examples",
+    "dev": "webpack --watch",
     "build": "webpack",
     "copylib": "copyfiles -f dist/sandbox.js examples/lib/",
     "test": "mocha test"

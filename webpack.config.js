@@ -1,15 +1,14 @@
 const path = require('path');
 
-module.exports = {
+
+/* ---------------
+ * Main config
+ * We will place here all the common settings
+ * ---------------*/
+var config = {
     mode: 'production',
     module: {
         rules: [
-            {
-                enforce: 'pre',
-                test: /\.(js)$/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader',
-            },
             {
                 test: /\.(js)$/,
                 exclude: /node_modules/,
@@ -21,13 +20,37 @@ module.exports = {
                 },
             },
         ],
-    },
-    entry: './src/index.js',
+    }
+}
+
+var configDist = Object.assign({}, config, {
+    entry: 
+    {
+        dist: './src/index.js'
+    },    
     output: {
         library: 'sandbox',
         libraryTarget: 'umd',
         umdNamedDefine: true,
         filename: 'sandbox.js',
         path: path.resolve(__dirname, 'dist'),
-    },
-};
+    }
+});
+
+
+var configExamples = Object.assign({}, config, {
+    entry: 
+    {
+        dist: './src/index.js'
+    },    
+    output: {
+        library: 'sandbox',
+        libraryTarget: 'umd',
+        umdNamedDefine: true,
+        filename: 'sandbox.js',
+        path: path.resolve(__dirname, 'examples'),
+    }
+});
+
+
+module.exports = [configDist, configExamples];
