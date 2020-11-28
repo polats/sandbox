@@ -11,16 +11,15 @@
     "dist/sandbox.js"
   ],
   "scripts": {
-    "play": "npm run copylib && serve examples",
-    "dev": "webpack --watch",
+    "dev": "concurrently --kill-others-on-fail \"webpack --watch\" \"serve examples\"",
     "build": "webpack",
-    "copylib": "copyfiles -f dist/sandbox.js examples/lib/",
     "test": "mocha test"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "babel-loader": "^8.2.1",
+    "concurrently": "^5.3.0",
     "copyfiles": "^2.4.0",
     "eslint": "^7.11.0",
     "eslint-config-airbnb-base": "^14.2.1",
