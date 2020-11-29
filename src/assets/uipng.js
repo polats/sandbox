@@ -911,7 +911,7 @@ data = {
 					}
 				},
 				{
-					"filename": "grey_button08.png",
+					"filename": "grey_square_button_hover.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -936,7 +936,7 @@ data = {
 					}
 				},
 				{
-					"filename": "grey_button10.png",
+					"filename": "grey_square_button_pressed.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -961,7 +961,7 @@ data = {
 					}
 				},
 				{
-					"filename": "grey_button12.png",
+					"filename": "grey_square_button_neutral.png",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {

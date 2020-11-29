@@ -1,61 +1,97 @@
+import { GameManager } from '.';
+import { Button } from './button'
+
 export class ExampleMainMenuScene extends Phaser.Scene {
     constructor() {
         super('ExampleMainMenu');
         this.bgFilesLoaded = false;
+
     }
+
     create() {
-        this.add.sprite(0, 0, 'background').setOrigin(0,0);
 
-		EPT.Storage.initUnset('EPT-highscore', 0);
-		var highscore = EPT.Storage.get('EPT-highscore');
+        var atlasTexture = this.textures.get('UI_PNG_ATLAS');
+        var frames = atlasTexture.getFrameNames();
 
-        this.waitingForSettings = false;
+        var x = 100;
+        var y = 50;
+        for (var i = 0; i < frames.length; i++)
+        {
+            var img = this.add.image(x, y, 'UI_PNG_ATLAS', frames[i]);
+            x += 100;
+            if (i % 10 === 0) {
+                x = 150;
+                y += 50;
+            }
+        }        
+        
+        this.buttonSettings = new Button(
+                GameManager.world.centerX, 
+                GameManager.world.centerY, 
+                'UI_PNG_ATLAS', 
+                this.clickSettings, 
+                this,
+                [
+                    "grey_square_button_neutral.png",                   
+                    "grey_square_button_hover.png",                   
+                    "grey_square_button_pressed.png" 
+                ]);
 
-        var title = this.add.sprite(EPT.world.centerX, EPT.world.centerY-50, 'title');
-        title.setOrigin(0.5);
+        console.log(frames);
 
-        this.input.keyboard.on('keydown', this.handleKey, this);
+        // this.add.sprite(0, 0, 'background').setOrigin(0,0);
 
-        this.tweens.add({targets: title, angle: title.angle-2, duration: 1000, ease: 'Sine.easeInOut' });
-        this.tweens.add({targets: title, angle: title.angle+4, duration: 2000, ease: 'Sine.easeInOut', yoyo: 1, loop: -1, delay: 1000 });
+		// EPT.Storage.initUnset('EPT-highscore', 0);
+		// var highscore = EPT.Storage.get('EPT-highscore');
 
-        this.buttonSettings = new Button(20, 20, 'button-settings', this.clickSettings, this);
-        this.buttonSettings.setOrigin(0, 0);
+        // this.waitingForSettings = false;
 
-        var buttonEnclave = new Button(20, EPT.world.height-40, 'logo-enclave', this.clickEnclave, this, 'static');
-        buttonEnclave.setOrigin(0, 1);
+        // var title = this.add.sprite(EPT.world.centerX, EPT.world.centerY-50, 'title');
+        // title.setOrigin(0.5);
 
-        this.buttonStart = new Button(EPT.world.width-20, EPT.world.height-20, 'button-start', this.clickStart, this);
-        this.buttonStart.setOrigin(1, 1);
+        // this.input.keyboard.on('keydown', this.handleKey, this);
 
-		var fontHighscore = { font: '38px '+EPT.text['FONT'], fill: '#ffde00', stroke: '#000', strokeThickness: 5 };
-		var textHighscore = this.add.text(EPT.world.width-30, 60, EPT.text['menu-highscore']+highscore, fontHighscore);
-		textHighscore.setOrigin(1, 0);
+        // this.tweens.add({targets: title, angle: title.angle-2, duration: 1000, ease: 'Sine.easeInOut' });
+        // this.tweens.add({targets: title, angle: title.angle+4, duration: 2000, ease: 'Sine.easeInOut', yoyo: 1, loop: -1, delay: 1000 });
 
-		this.buttonStart.x = EPT.world.width+this.buttonStart.width+20;
-        this.tweens.add({targets: this.buttonStart, x: EPT.world.width-20, duration: 500, ease: 'Back'});
+        // this.buttonSettings = new Button(20, 20, 'button-settings', this.clickSettings, this);
+        // this.buttonSettings.setOrigin(0, 0);
 
-		buttonEnclave.x = -buttonEnclave.width-20;
-        this.tweens.add({targets: buttonEnclave, x: 20, duration: 500, ease: 'Back'});
+        // var buttonEnclave = new Button(20, EPT.world.height-40, 'logo-enclave', this.clickEnclave, this, 'static');
+        // buttonEnclave.setOrigin(0, 1);
 
-        this.buttonSettings.y = -this.buttonSettings.height-20;
-        this.tweens.add({targets: this.buttonSettings, y: 20, duration: 500, ease: 'Back'});
+        // this.buttonStart = new Button(EPT.world.width-20, EPT.world.height-20, 'button-start', this.clickStart, this);
+        // this.buttonStart.setOrigin(1, 1);
 
-        textHighscore.y = -textHighscore.height-30;
-        this.tweens.add({targets: textHighscore, y: 40, duration: 500, delay: 100, ease: 'Back'});
+		// var fontHighscore = { font: '38px '+EPT.text['FONT'], fill: '#ffde00', stroke: '#000', strokeThickness: 5 };
+		// var textHighscore = this.add.text(EPT.world.width-30, 60, EPT.text['menu-highscore']+highscore, fontHighscore);
+		// textHighscore.setOrigin(1, 0);
 
-        this.cameras.main.fadeIn(250);
+		// this.buttonStart.x = EPT.world.width+this.buttonStart.width+20;
+        // this.tweens.add({targets: this.buttonStart, x: EPT.world.width-20, duration: 500, ease: 'Back'});
 
-        if(!this.bgFilesLoaded) {
-            this.time.addEvent({
-                delay: 500,
-                callback: function() {
-                    this.startPreloadInTheBackground();
-                },
-                callbackScope: this
-            }, this);
-        }
+		// buttonEnclave.x = -buttonEnclave.width-20;
+        // this.tweens.add({targets: buttonEnclave, x: 20, duration: 500, ease: 'Back'});
+
+        // this.buttonSettings.y = -this.buttonSettings.height-20;
+        // this.tweens.add({targets: this.buttonSettings, y: 20, duration: 500, ease: 'Back'});
+
+        // textHighscore.y = -textHighscore.height-30;
+        // this.tweens.add({targets: textHighscore, y: 40, duration: 500, delay: 100, ease: 'Back'});
+
+        // this.cameras.main.fadeIn(250);
+
+        // if(!this.bgFilesLoaded) {
+        //     this.time.addEvent({
+        //         delay: 500,
+        //         callback: function() {
+        //             this.startPreloadInTheBackground();
+        //         },
+        //         callbackScope: this
+        //     }, this);
+        // }
     }
+
     handleKey(e) {
         switch(e.code) {
             case 'KeyS': {
