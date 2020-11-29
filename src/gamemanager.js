@@ -6,10 +6,20 @@ BASE64_ATLAS =
     UI_PNG: require('./assets/uipng')
 }
 
-cacheImageViaUri = function(context, imagename, datauri) {
+cacheImageViaUri = function(context, imagename, datauri, callback = null, args = null) {
 
     context.textures.once('addtexture', function (key) {
+        callback(args, key);
+    }, context);
 
+    context.textures.addBase64(imagename, datauri);
+}
+
+startPreloaderScene = function(context, key = null) {
+    context.scene.start('Preloader');
+}
+
+loadAtlasJson = function(context, key) {
         // check if it's a base64 atlas
         var b64atlas = BASE64_ATLAS[key];
 
@@ -20,15 +30,12 @@ cacheImageViaUri = function(context, imagename, datauri) {
 
             // listener for when atlas is loaded
             context.textures.once('addtexture', function (key) {
-                // console.log(context.textures.get(key).getFrameNames())
+                updateProgressBar(key);
             }, context);
 
             context.textures.addAtlasJSONArray(key + "_ATLAS", source, atlas);
         }
 
-    }, context);
-
-    context.textures.addBase64(imagename, datauri);
 }
 
 class BootScene extends Phaser.Scene {
@@ -36,7 +43,7 @@ class BootScene extends Phaser.Scene {
         super('Boot');
     }
     preload() {
-        cacheImageViaUri(this, 'background', IMAGE_PIXEL_DATAURI);
+        cacheImageViaUri(this, 'background', IMAGE_PIXEL_DATAURI, startPreloaderScene, this);
         // this.load.image('background', 'assets/background.png');
         // this.load.image('logo-enclave', 'img/logo-enclave.png');
         // this.load.image('loading-background', 'img/loading-background.png');
@@ -49,16 +56,47 @@ class BootScene extends Phaser.Scene {
             centerX: this.cameras.main.centerX,
             centerY: this.cameras.main.centerY
         };
-        this.scene.start('Preloader');
     }
 }
 
+var PreloadResources = {
+    'base64-spritesheet': [
+        [BASE64_ATLAS.UI_PNG]
+    ],            
+    // 'image': [
+    //     ['title', 'img/title.png']
+    // ],
+    // 'spritesheet': [
+    //     ['button-start', 'img/button-start.png', {frameWidth:180,frameHeight:180}],
+    //     ['button-settings', 'img/button-settings.png', {frameWidth:80,frameHeight:80}],
+    //     ['loader', 'img/loader.png', {frameWidth:45,frameHeight:45}]
+    // ]
+};
+
+var PROGRESS_MAX = 1;
+var currentProgress = 0;
+var grayBg, progressBarBg, progressIndicator;
+
+updateProgressBar = function(key) {
+    currentProgress++;
+    var value = currentProgress / PROGRESS_MAX;
+    progressIndicator.clear();
+    progressIndicator.fillStyle(0xffde00, 1);
+    progressIndicator.fillRect(
+        GameManager.world.width * 0.15, 
+        GameManager.world.height / 2 - (GameManager.world.height * 0.0175),
+        GameManager.world.width * 0.70 * value,
+        GameManager.world.height * 0.035);
+}
+
 class PreloaderScene extends Phaser.Scene {
+
     constructor() {
         super('Preloader');
     }
+
     preload() {
-		var grayBg = this.add.sprite(
+		grayBg = this.add.sprite(
                 GameManager.world.centerX, 
                 GameManager.world.centerY, 
                 'background')
@@ -67,7 +105,7 @@ class PreloaderScene extends Phaser.Scene {
                 GameManager.world.height)
             .setTintFill(0x000000, 0x000000, 0x888888, 0x888888);
 
-        var progressBarBg = this.add.sprite(
+        progressBarBg = this.add.sprite(
                 GameManager.world.centerX, 
                 GameManager.world.centerY, 
                 'background')
@@ -76,41 +114,16 @@ class PreloaderScene extends Phaser.Scene {
                 GameManager.world.height * 0.05)
             .setOrigin(0.5, 0.5);
 
-        var resources = {
-            'image': [
-                ['title', 'img/title.png']
-            ],
-            'spritesheet': [
-                ['button-start', 'img/button-start.png', {frameWidth:180,frameHeight:180}],
-                ['button-settings', 'img/button-settings.png', {frameWidth:80,frameHeight:80}],
-                ['loader', 'img/loader.png', {frameWidth:45,frameHeight:45}]
-            ],
-            'base64-spritesheet': [
-                [BASE64_ATLAS.UI_PNG]
-            ]
-        };
+        progressIndicator = this.add.graphics();
 
-        var progress = this.add.graphics();
-
-        this.load.on('progress', function (value) {
-			progress.clear();
-			progress.fillStyle(0xffde00, 1);
-			progress.fillRect(
-                GameManager.world.width * 0.15, 
-                GameManager.world.height / 2 - (GameManager.world.height * 0.0175),
-                GameManager.world.width * 0.70 * value,
-                GameManager.world.height * 0.035);
-        }); 
-        
-
-		for(var method in resources) {
-			resources[method].forEach(function(args) {
+		for(var method in PreloadResources) {
+			PreloadResources[method].forEach(function(args) {
                 switch (method)
                 {
                     case 'base64-spritesheet':
                         var id = args[0].data.ID;
                         var datauri = args[0].data.DATAURI;
-                        cacheImageViaUri(this, id, datauri);   
+                        cacheImageViaUri(this, id, datauri, loadAtlasJson, this);   
                         break;
 
                     default:
@@ -119,37 +132,9 @@ class PreloaderScene extends Phaser.Scene {
                         break;
                 }
 			}, this);
-		};        
-        
-        // var logoEnclave = this.add.sprite(EPT.world.centerX, EPT.world.centerY-100, 'logo-enclave');
-        // logoEnclave.setOrigin(0.5, 0.5);
-		// var loadingBg = this.add.sprite(EPT.world.centerX, EPT.world.centerY+100, 'loading-background');
-		// loadingBg.setOrigin(0.5, 0.5);
-
-		// var progress = this.add.graphics();
-		// this.load.on('progress', function (value) {
-		// 	progress.clear();
-		// 	progress.fillStyle(0xffde00, 1);
-		// 	progress.fillRect(loadingBg.x-(loadingBg.width*0.5)+20, loadingBg.y-(loadingBg.height*0.5)+10, 540 * value, 25);
-		// });
-
-		// var resources = {
-		// 	'image': [
-		// 		['title', 'img/title.png']
-		// 	],
-		// 	'spritesheet': [
-		// 		['button-start', 'img/button-start.png', {frameWidth:180,frameHeight:180}],
-		// 		['button-settings', 'img/button-settings.png', {frameWidth:80,frameHeight:80}],
-		// 		['loader', 'img/loader.png', {frameWidth:45,frameHeight:45}]
-		// 	]
-		// };
-		// for(var method in resources) {
-		// 	resources[method].forEach(function(args) {
-		// 		var loader = this.load[method];
-		// 		loader && loader.apply(this.load, args);
-		// 	}, this);
-		// };
+		};                
     }
+
     create() {
 		// GameManager.fadeOutScene('MainMenuScene', this);
 	}
