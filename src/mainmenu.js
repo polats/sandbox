@@ -1,6 +1,6 @@
-class MainMenuScene extends Phaser.Scene {
+export class ExampleMainMenuScene extends Phaser.Scene {
     constructor() {
-        super('MainMenu');
+        super('ExampleMainMenu');
         this.bgFilesLoaded = false;
     }
     create() {

@@ -15,10 +15,6 @@ cacheImageViaUri = function(context, imagename, datauri, callback = null, args =
     context.textures.addBase64(imagename, datauri);
 }
 
-startPreloaderScene = function(context, key = null) {
-    context.scene.start('Preloader');
-}
-
 loadAtlasJson = function(context, key) {
         // check if it's a base64 atlas
         var b64atlas = BASE64_ATLAS[key];
@@ -30,12 +26,16 @@ loadAtlasJson = function(context, key) {
 
             // listener for when atlas is loaded
             context.textures.once('addtexture', function (key) {
-                updateProgressBar(key);
+                updateProgressBar(context, key);
             }, context);
 
             context.textures.addAtlasJSONArray(key + "_ATLAS", source, atlas);
         }
 
+}
+
+startPreloaderScene = function(context, key = null) {
+    context.scene.start('Preloader');
 }
 
 class BootScene extends Phaser.Scene {
@@ -77,7 +77,9 @@ var PROGRESS_MAX = 1;
 var currentProgress = 0;
 var grayBg, progressBarBg, progressIndicator;
 
-updateProgressBar = function(key) {
+updateProgressBar = function(context, key) {
+
+    // console.log("loaded " + key);
     currentProgress++;
     var value = currentProgress / PROGRESS_MAX;
     progressIndicator.clear();
@@ -87,6 +89,27 @@ updateProgressBar = function(key) {
         GameManager.world.height / 2 - (GameManager.world.height * 0.0175),
         GameManager.world.width * 0.70 * value,
         GameManager.world.height * 0.035);
+
+    if (value >= PROGRESS_MAX)
+    {
+        var nextScene = 'ExampleMainMenu';
+
+        try {
+            var keys = Object.keys(context.scene.manager.keys);
+
+            console.log(keys);
+
+            if (keys.length > 2)
+            {
+                nextScene = keys[2];
+            }
+        } catch (e)
+        {
+            console.log(e);
+        }
+        
+		GameManager.fadeOutScene(nextScene, context);
+    }
 }
 
 class PreloaderScene extends Phaser.Scene {
@@ -136,7 +159,7 @@ class PreloaderScene extends Phaser.Scene {
     }
 
     create() {
-		// GameManager.fadeOutScene('MainMenuScene', this);
+
 	}
 }
 
@@ -209,7 +232,8 @@ GameManager.fadeOutIn = function(passedCallback, context) {
     scene: [BootScene, PreloaderScene]
 };
 
-GameManager.startGame = function(canvas = null, configOverride = null) {
+GameManager.startGame = function(canvas = null, configOverride = null,
+    scenes = null) {
 
    var config = 
     {
@@ -226,6 +250,10 @@ GameManager.startGame = function(canvas = null, configOverride = null) {
             ...config,
             ...configOverride
         }
+    }
+
+    if (scenes) {
+        config.scene = GameManager.config.scene.concat(scenes);
     }
 
     GameManager.game = new Phaser.Game(config);

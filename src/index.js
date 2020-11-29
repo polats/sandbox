@@ -14,6 +14,7 @@ import { Viewport } from './containers/viewport';
 import { Button } from './phaserObjects/button';
 
 import { GameManager } from './gamemanager'
+import { ExampleMainMenuScene } from './mainmenu'
 
 export {
     TextSprite,
@@ -28,5 +29,6 @@ export {
     Row,
     Viewport,
     Button,
-    GameManager
+    GameManager,
+    ExampleMainMenuScene
 };

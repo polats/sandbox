@@ -4,7 +4,16 @@
     <script src="./phaser.3.24.1.min.js"></script>
     <script src="./sandbox.js"></script>
     <script>
-      sandbox.GameManager.startGame();
+
+      var gameScenes =
+      [
+        sandbox.ExampleMainMenuScene
+      ];
+
+      sandbox.GameManager.startGame(
+        null,
+        null,
+        gameScenes);
 
       // We can override the Phaser config like:
       // sandbox.GameManager.startGame(null,
