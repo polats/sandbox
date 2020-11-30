@@ -14,8 +14,11 @@
 // import { Button } from './phaserObjects/button';
 
 import { GameManager } from './gamemanager'
-import { ExampleMainMenuScene } from './mainmenu'
+
+import { GameBar } from './gamebar'
 import { Button } from './button'
+
+import { ExampleMainMenuScene } from './mainmenu'
 
 export {
     // TextSprite,
@@ -29,7 +32,8 @@ export {
     // Column,
     // Row,
     // Viewport,
-    Button,
     GameManager,
+    GameBar,
+    Button,
     ExampleMainMenuScene
 };

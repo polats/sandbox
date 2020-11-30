@@ -1,5 +1,6 @@
 import { GameManager } from '.';
 import { Button } from './button'
+import { GameBar } from './gamebar'
 
 export class ExampleMainMenuScene extends Phaser.Scene {
     constructor() {
@@ -19,25 +20,15 @@ export class ExampleMainMenuScene extends Phaser.Scene {
         {
             var img = this.add.image(x, y, 'UI_PNG_ATLAS', frames[i]);
             x += 100;
-            if (i % 10 === 0) {
-                x = 150;
+            if (i % 5 === 0) {
+                x = 100;
                 y += 50;
             }
-        }        
-        
-        this.buttonSettings = new Button(
-                GameManager.world.centerX, 
-                GameManager.world.centerY, 
-                'UI_PNG_ATLAS', 
-                this.clickSettings, 
-                this,
-                [
-                    "grey_square_button_neutral.png",                   
-                    "grey_square_button_hover.png",                   
-                    "grey_square_button_pressed.png" 
-                ]);
+        }            
 
         console.log(frames);
+
+        this.gameBar = new GameBar(this);
 
         // this.add.sprite(0, 0, 'background').setOrigin(0,0);
 

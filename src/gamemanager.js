@@ -191,8 +191,8 @@ GameManager.fadeOutIn = function(passedCallback, context) {
     type: Phaser.WEBGL,
     scale: {
         mode: Phaser.Scale.FIT,
-		width: 1366, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
-		height: 768 // 768 1024 640
+		width: 540, // 1366, 768, 360 // most common resolutions: desktop, tablet, mobile
+		height: 960 // 768 1024 640
     },
     scene: [BootScene, PreloaderScene]
 };

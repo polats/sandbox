@@ -3,15 +3,16 @@ export class Button extends Phaser.GameObjects.Image {
         framePointerOut, framePointerOver, framePointerDown
     ]) {
       super(scene, x, y, texture, framePointerOut);
+
       this.setInteractive({ useHandCursor: true });
       
       this.on('pointerup', function() {
-          this.setFrame(framePointerOver);
+        this.setFrame(framePointerOver);
       }, this);
   
       this.on('pointerdown', function() {
-          this.setFrame(framePointerDown);
-//        callback.call(scene);
+        this.setFrame(framePointerDown);
+        callback.call(scene);
       }, this);
   
       this.on('pointerover', function() {
