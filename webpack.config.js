@@ -7,27 +7,27 @@ const path = require('path');
  * ---------------*/
 var config = {
     mode: 'production',
+    entry: 
+    {
+        dist: './src/index.ts'
+    },    
+    resolve: {
+        extensions: ['.ts', '.js']
+      },
     module: {
         rules: [
             {
-                test: /\.(js)$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
-                },
-            },
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                options: {
+                  configFile: 'tsconfig.json'
+                }
+            }
         ],
     }
 }
 
 var configDist = Object.assign({}, config, {
-    entry: 
-    {
-        dist: './src/index.js'
-    },    
     output: {
         library: 'sandbox',
         libraryTarget: 'umd',
@@ -39,10 +39,6 @@ var configDist = Object.assign({}, config, {
 
 
 var configExamples = Object.assign({}, config, {
-    entry: 
-    {
-        dist: './src/index.js'
-    },    
     output: {
         library: 'sandbox',
         libraryTarget: 'umd',

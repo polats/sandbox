@@ -27,8 +27,10 @@
     "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.0",
     "serve": "^11.3.2",
-    "webpack": "^5.1.1",
-    "webpack-cli": "^4.0.0"
+    "ts-loader": "^6.2.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.10"
   },
   "peerDependencies": {
     "phaser-ce": "2.10.3"
