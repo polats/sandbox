@@ -8,7 +8,7 @@ export class ExampleMainMenuScene extends Phaser.Scene {
         super('ExampleMainMenu');
         this.bgFilesLoaded = false;
 
-        var mg = new MinesweeperGame(10, 10, 20);
+        var mg = new MinesweeperGame(30, 10, 20);
         console.log(MinesweeperGame)
         console.log(mg.width)
         console.log("SDFD")

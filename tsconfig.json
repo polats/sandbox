@@ -17,7 +17,7 @@
       "noImplicitAny": true,
       "noImplicitReturns": true,
       "allowJs": true,
-      "outDir": "./dist",
+      "outDir": "./.tmp",
       "rootDir": "./src"
 
     },
